@@ -22,7 +22,7 @@ RUN apk --update add tesseract-ocr && chmod a+rwx "$TESSDATA_PREFIX" && clean
 
 # COPY rootfs /
 
-RUN if [ "$version" != '3.04.00' ]; then tessdata osd equ; fi
+# RUN if [ "$version" != '3.04.00' ]; then tessdata osd equ; fi
 
 CMD [ "tesseract" ]
 
