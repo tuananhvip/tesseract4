@@ -19,7 +19,6 @@ ENV TESSDATA_PREFIX=/usr/share/tessdata \
 ENV OMP_THREAD_LIMIT=1
 
 RUN apk --update add tesseract-ocr && chmod a+rwx "$TESSDATA_PREFIX" && clean
-RUN apt-get install tesseract-ocr-chi-sim
 
 COPY rootfs /
 
@@ -32,7 +31,7 @@ CMD [ "tesseract" ]
 FROM latest as lang
 ARG lang
 RUN tessdata $lang
-
+RUN tessdata $langcn
 FROM latest
 
 
