@@ -4,11 +4,11 @@ ARG lang="eng"
 ARG langcn="chi_sim"
 
 
-FROM minidocks/base:3.8 as v3
+FROM ubuntu:latest
 
-FROM minidocks/librsvg as v4
-
-FROM $base_version as latest
+#FROM minidocks/base:3.8 as v3
+#FROM minidocks/librsvg as v4
+#FROM $base_version as latest
 
 
 ARG version
