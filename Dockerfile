@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:alex-p/tesseract-ocr
-RUN apt-get update \
-    && apt install tesseract-ocr \
-    && apt install libtesseract-dev \
+RUN apt-get update -y \
+    && apt -y install tesseract-ocr \
+    && apt -y install libtesseract-dev \
     && apt-get install -y tesseract-ocr-chi-sim-vert  \
     && apt-get install -y tesseract-ocr-vie \
     && apt-get install -y tesseract-ocr-chi-sim
