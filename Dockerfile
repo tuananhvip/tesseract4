@@ -30,9 +30,7 @@ CMD [ "tesseract" ]
 
 # Lang
 FROM latest as lang
-ARG lang
-RUN tessdata $lang
-RUN tessdata $langcn
+RUN apt-get install tesseract-ocr-chi-sim
 FROM latest
 
 
