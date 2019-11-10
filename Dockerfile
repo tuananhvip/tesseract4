@@ -1,37 +1,54 @@
-ARG version=4.0.0
-ARG base_version=v4
-ARG lang="eng"
-ARG langcn="chi_sim"
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:alex-p/tesseract-ocr
+RUN apt-get update \
+    && apt install tesseract-ocr \
+    && apt install libtesseract-dev \
+    && apt-get install -y tesseract-ocr-chi-sim-vert  \
+    && apt-get install -y tesseract-ocr-vie \
+    && apt-get install -y tesseract-ocr-chi-sim
+
+#RUN pip install pytesseract
+
+RUN mkdir /home/work
+WORKDIR /home/work
 
 
-FROM ubuntu:latest
 
-#FROM minidocks/base:3.8 as v3
-#FROM minidocks/librsvg as v4
-#FROM $base_version as latest
-
-
-ARG version
-ENV TESSDATA_PREFIX=/usr/share/tessdata \
-    TESSDATA_URL=https://github.com/tesseract-ocr/tessdata/blob/master/chi_sim.traineddata
-
-#    TESSDATA_URL=https://github.com/tesseract-ocr/tessdata/raw/$version
-# https://github.com/tesseract-ocr/tesseract/issues/898#issuecomment-315202167
-ENV OMP_THREAD_LIMIT=1
-
-RUN apk --update add tesseract-ocr && chmod a+rwx "$TESSDATA_PREFIX" && clean
-
-# COPY rootfs /
-
-# RUN if [ "$version" != '3.04.00' ]; then tessdata osd equ; fi
-
-CMD [ "tesseract" ]
+# ARG version=4.0.0
+# ARG base_version=v4
+# ARG lang="eng"
+# ARG langcn="chi_sim"
 
 
-# Lang
-FROM latest as lang
-RUN apt-get install tesseract-ocr-chi-sim
-FROM latest
+# FROM ubuntu:latest
+
+# #FROM minidocks/base:3.8 as v3
+# #FROM minidocks/librsvg as v4
+# #FROM $base_version as latest
+
+
+# ARG version
+# ENV TESSDATA_PREFIX=/usr/share/tessdata \
+#     TESSDATA_URL=https://github.com/tesseract-ocr/tessdata/blob/master/chi_sim.traineddata
+
+# #    TESSDATA_URL=https://github.com/tesseract-ocr/tessdata/raw/$version
+# # https://github.com/tesseract-ocr/tesseract/issues/898#issuecomment-315202167
+# ENV OMP_THREAD_LIMIT=1
+
+# RUN apk --update add tesseract-ocr && chmod a+rwx "$TESSDATA_PREFIX" && clean
+
+# # COPY rootfs /
+
+# # RUN if [ "$version" != '3.04.00' ]; then tessdata osd equ; fi
+
+# CMD [ "tesseract" ]
+
+
+# # Lang
+# FROM latest as lang
+# RUN apt-get install tesseract-ocr-chi-sim
+# FROM latest
 
 
 
