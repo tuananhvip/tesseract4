@@ -1,10 +1,7 @@
 FROM ubuntu:latest
 
-ENV LANG='en_GB.UTF-8' LANGUAGE='en_GB:en' LC_ALL='en_GB.UTF-8'
-RUN echo en_GB.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen
-
 RUN apt-get update \
-  && apt-get install -y python3-pip python3-dev \
+  && apt-get install -y python3-pip python3-dev locales \
   && cd /usr/local/bin \
   && ln -s /usr/bin/python3 python \
   && pip3 install --upgrade pip
@@ -22,6 +19,20 @@ RUN apt-get install -y libsm6 libxext6 libxrender-dev && \
     pip install --upgrade pip  && \
     pip install pytesseract && \
     pip install numpy requests opencv-python matplotlib Cython tqdm logic
+
+#PA1:
+#https://docs.moodle.org/dev/Table_of_locales
+RUN locale-gen zh_CN.UTF-8
+
+COPY ./default_locale /etc/default/locale
+RUN chmod 0755 /etc/default/locale
+
+ENV LC_ALL=zh_CN.UTF-8
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN.UTF-8
+#P
+#ENV LANG='zh_CN.UTF-8' LANGUAGE='zh_CN:en' LC_ALL='zh_CN.UTF-8'
+#RUN echo zh_CN.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen
 
 RUN mkdir /home/work
 WORKDIR /home/work
