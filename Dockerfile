@@ -22,17 +22,27 @@ RUN apt-get install -y libsm6 libxext6 libxrender-dev && \
 
 #PA1:
 #https://docs.moodle.org/dev/Table_of_locales
-RUN locale-gen zh_CN.UTF-8
+# RUN locale-gen zh_CN.UTF-8
 
-COPY ./default_locale /etc/default/locale
-RUN chmod 0755 /etc/default/locale
+# COPY ./default_locale /etc/default/locale
+# RUN chmod 0755 /etc/default/locale
 
-ENV LC_ALL=zh_CN.UTF-8
-ENV LANG=zh_CN.UTF-8
-ENV LANGUAGE=zh_CN.UTF-8
-#P
+# ENV LC_ALL=zh_CN.UTF-8
+# ENV LANG=zh_CN.UTF-8
+# ENV LANGUAGE=zh_CN.UTF-8
+
+#PA2 
 #ENV LANG='zh_CN.UTF-8' LANGUAGE='zh_CN:en' LC_ALL='zh_CN.UTF-8'
 #RUN echo zh_CN.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen
+#PA3:
+
+ENV LANG="en_US.UTF-8"
+RUN apt-get update && apt-get install -y locales
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    cp /etc/locale.alias /usr/share/locale/ && \
+    locale-gen en_US.UTF-8 && \
+    /usr/sbin/update-locale LANG=en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 RUN mkdir /home/work
 WORKDIR /home/work
