@@ -13,8 +13,10 @@ RUN apt-get update -y \
     && apt-get install -y tesseract-ocr-chi-sim-vert  \
     && apt-get install -y tesseract-ocr-vie \
     && apt-get install -y tesseract-ocr-chi-sim
-
-#RUN pip install pytesseract
+# moi them:    
+RUN pip install --upgrade pip
+RUN pip install pytesseract
+RUN pip install numpy requests opencv-python matplotlib Cython tqdm logic
 
 RUN mkdir /home/work
 WORKDIR /home/work
