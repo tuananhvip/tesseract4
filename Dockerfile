@@ -1,5 +1,8 @@
 FROM ubuntu:latest
 
+ENV LANG='en_GB.UTF-8' LANGUAGE='en_GB:en' LC_ALL='en_GB.UTF-8'
+RUN echo en_GB.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen
+
 RUN apt-get update \
   && apt-get install -y python3-pip python3-dev \
   && cd /usr/local/bin \
