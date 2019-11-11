@@ -12,11 +12,13 @@ RUN apt-get update -y \
     && apt-get -y install libtesseract-dev \
     && apt-get install -y tesseract-ocr-chi-sim-vert  \
     && apt-get install -y tesseract-ocr-vie \
-    && apt-get install -y tesseract-ocr-chi-sim
+    && apt-get install -y tesseract-ocr-chi-sim 
 # moi them:    
-RUN pip install --upgrade pip
-RUN pip install pytesseract
-RUN pip install numpy requests opencv-python matplotlib Cython tqdm logic
+RUN apt-get install -y libsm6 libxext6 libxrender-dev && \
+    pip install opencv-python-headless && \
+    pip install --upgrade pip  && \
+    pip install pytesseract && \
+    pip install numpy requests opencv-python matplotlib Cython tqdm logic
 
 RUN mkdir /home/work
 WORKDIR /home/work
